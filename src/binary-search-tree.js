@@ -32,7 +32,7 @@ class BinarySearchTree {
 
   add(data) {
     // throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  //   // remove line with error and write your code here
     const newNode = new Node(data);
 
     if (this.head === null) {
@@ -52,42 +52,7 @@ class BinarySearchTree {
       return cur
     }
 
-
-    // while (cur) {
-    //   if (newNode.data < cur.data) {
-    //     if(cur.left === null) {
-    //       cur.left === newNode;
-    //   } else {
-
-    //   }
-    // }
-
-    // return this.head;
-
-
-    // while (cur) {
-    //   if (newNode.data > cur.data) {
-    //     if (cur.right === null) {
-    //       cur.right = newNode;
-    //       return;
-    //     }
-    //     cur = cur.right;
-    //   } else {
-    //     if (cur.left === null) {
-    //       cur.left = newNode;
-    //       return;
-    //     }
-    //     cur = cur.left;
-    //   }
-    // }
-
-    // return cur;
-
-
-
   }
-
-
 
 
   has(/* data */) {
@@ -98,22 +63,19 @@ class BinarySearchTree {
   find(data) {
     // throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
-    if(this.head === null) {
-      return null;
-    }
 
     let cur = this.head;
 
-    while(cur) {
-      if(data > cur.data) {
-        cur = cur.right;
-      } else if (data < cur.data) {
+    while (cur) {
+      if (data < cur.data) {
         cur = cur.left;
+      } else if (data > cur.data) {
+        cur = cur.right;
       } else {
+        return cur;
       }
-      return cur;
     }
-
+    return null;
 
 
   }
