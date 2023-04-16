@@ -33,7 +33,6 @@ class BinarySearchTree {
     return this.root_ === null
   }
 
-
   add(value) {
       const newNode = new Node(value)
       if(this.isEmpty()) {
@@ -81,8 +80,6 @@ class BinarySearchTree {
       }
     }
   }
-
-
 
   remove(/* data */) {
     throw new NotImplementedError('Not implemented');
