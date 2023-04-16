@@ -20,103 +20,69 @@ const { Node } = require('../extensions/list-tree.js');
 class BinarySearchTree {
 
   constructor() {
-    this.head = null;
+    this.root_ = null;
 }
 
   root() {
     // throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
-    return this.head;
+    return this.root_;
+  }
+
+  isEmpty() {
+    return this.root_ === null
   }
 
 
-  add(data) {
-    // throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-    const newNode = new Node(data);
-
-    if (this.head === null) {
-      this.head = newNode;
-    }
-    let cur = this.head;
-    while (cur) {
-      if (newNode.data > cur.data) {
-        if (cur.right === null) {
-          cur.right = newNode;
-        }
+  add(value) {
+      const newNode = new Node(value)
+      if(this.isEmpty()) {
+        this.root_ = newNode
       } else {
-        if (cur.left === null) {
-          cur.left = newNode;
-        }
+       this.addNode(this.root_, newNode)
       }
-      return cur
     }
 
-
-    // while (cur) {
-    //   if (newNode.data < cur.data) {
-    //     if(cur.left === null) {
-    //       cur.left === newNode;
-    //   } else {
-
-    //   }
-    // }
-
-    // return this.head;
-
-
-    // while (cur) {
-    //   if (newNode.data > cur.data) {
-    //     if (cur.right === null) {
-    //       cur.right = newNode;
-    //       return;
-    //     }
-    //     cur = cur.right;
-    //   } else {
-    //     if (cur.left === null) {
-    //       cur.left = newNode;
-    //       return;
-    //     }
-    //     cur = cur.left;
-    //   }
-    // }
-
-    // return cur;
-
-
-
-  }
-
-
-
-
-  has(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
-
-  find(data) {
-    // throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-    if(this.head === null) {
-      return null;
-    }
-
-    let cur = this.head;
-
-    while(cur) {
-      if(data > cur.data) {
-        cur = cur.right;
-      } else if (data < cur.data) {
-        cur = cur.left;
+  addNode(root, newNode) {
+    if(newNode.value < root.value) {
+      if(root.left === null) {
+        root.left = newNode
       } else {
+        this.addNode(root.left, newNode)
       }
-      return cur;
+    } else {
+      if(root.right === null) {
+        root.right = newNode
+      } else {
+        this.addNode(root.right, newNode)
+      }
     }
-
-
-
   }
+
+
+  has(value) {
+    return Boolean(this.findNode(this.root_,value))
+  }
+
+  find(value) {
+    return this.findNode(this.root_, value) || null
+  }
+
+  findNode(root, value) {
+    if(!root) {
+      return false
+    } else {
+      if (root.value === value) {
+        return root
+      } else if (value < root.value) {
+        return this.findNode(root.left, value)
+      } else {
+        return this.findNode(root.right, value)
+      }
+    }
+  }
+
+
 
   remove(/* data */) {
     throw new NotImplementedError('Not implemented');
@@ -139,16 +105,82 @@ module.exports = {
 };
 
 
+
 // class Node {
-//   constructor(data) {
-//       this.data = data; // node value
-//       this.left = null;   // left node child reference
-//       this.right = null; // right node child reference
+//   constructor(value) {
+//       this.value = value
+//       this.left = null
+//       this.right = null
 //   }
 // }
 
 // class BinarySearchTree {
 //   constructor() {
-//       this.root = null; // корень bst
+//       this.root = null
 //   }
+
+//   isEmpty() {
+//     return this.root === null
+//   }
+
+//   add(value) {
+//     const newNode = new Node(value)
+//     if(this.isEmpty()) {
+//       this.root = newNode
+//     } else {
+//       this.addNode(this.root, newNode)
+//     }
+//   }
+
+//   addNode(root, newNode) {
+//     if(newNode.value < root.value) {
+//       if(root.left === null) {
+//         root.left = newNode
+//       } else {
+//         this.addNode(root.left, newNode)
+//       }
+//     } else {
+//       if(root.right === null) {
+//         root.right = newNode
+//       } else {
+//         this.addNode(root.right, newNode)
+//       }
+//     }
+//   }
+
+//   find(value) {
+//     return this.findNode(this.root, value) || null
+//   }
+
+//   findNode(root, value) {
+//     if(!root) {
+//       return false
+//     } else {
+//       if (root.value === value) {
+//         return value
+//       } else if (value < root.value) {
+//         return this.findNode(root.left, value)
+//       } else {
+//         return this.findNode(root.right, value)
+//       }
+//     }
+//   }
+
 // }
+
+// const bst = new BinarySearchTree()
+// // console.log('Tree is empt?', bst.isEmpty());
+
+// bst.add(2);
+// bst.add(7);
+// bst.add(1);
+// bst.add(8);
+// bst.add(4);
+// bst.add(32);
+// bst.add(12);
+// bst.add(14);
+// // console.log('Tree is empt?', bst.isEmpty());
+// console.log(bst.find(33));
+// console.log(bst.find(1337));
+// console.log(bst.find(42));
+// console.log(bst.find(14));
